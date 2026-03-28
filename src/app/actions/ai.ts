@@ -49,3 +49,26 @@ export async function searchMotorcycleWithAI(query: string): Promise<{ data?: Mo
     return { error: 'AI search failed. Please fill in the details manually.' }
   }
 }
+
+/**
+ * Server action to generate personalized motorcycle maintenance insights based on model and mileage.
+ */
+export async function getMotorcycleAIInsights(make: string, modelStr: string, year: number | null, km: number): Promise<{ insight?: string; error?: string }> {
+  const apiKey = process.env.GOOGLE_AI_API_KEY
+  if (!apiKey) return { error: 'AI service not configured.' }
+
+  try {
+    const { getMotorcycleInsightsPrompt } = await import('@/ia/prompts/motorcycle-insights')
+    const genAI = new GoogleGenerativeAI(apiKey)
+    const model = genAI.getGenerativeModel({ model: 'gemini-3-flash-preview' })
+
+    const prompt = getMotorcycleInsightsPrompt(make, modelStr, year, km)
+    const result = await model.generateContent(prompt)
+    const tip = result.response.text().trim()
+
+    return { insight: tip }
+  } catch (err) {
+    console.error('Gemini Insights Error:', err)
+    return { error: 'No se pudieron generar consejos en este momento.' }
+  }
+}

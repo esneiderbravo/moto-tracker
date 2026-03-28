@@ -3,6 +3,9 @@ import { Bike, Calendar, Palette, Hash, Gauge, ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import DeleteMotorcycleButton from '@/components/garage/DeleteMotorcycleButton';
+import AIInsightCard from '@/components/garage/AIInsightCard';
+import { getMotorcycleRefuels } from '@/app/actions/refuels';
+import RefuelsSection from '@/components/garage/RefuelsSection';
 
 /**
  * Motorcycle detail page - SSR fetches the bike by ID and displays its attributes.
@@ -10,6 +13,7 @@ import DeleteMotorcycleButton from '@/components/garage/DeleteMotorcycleButton';
 export default async function MotorcycleDetailPage({ params }: { params: { id: string } }) {
   const { id } = await params;
   const moto = await getMotorcycleById(id);
+  const refuels = await getMotorcycleRefuels(id);
 
   if (!moto) {
     notFound();
@@ -55,6 +59,14 @@ export default async function MotorcycleDetailPage({ params }: { params: { id: s
           </p>
         </div>
 
+        {/* AI Insight Card */}
+        <AIInsightCard 
+           make={moto.make} 
+           model={moto.model} 
+           year={moto.year} 
+           km={moto.current_km || 0} 
+        />
+
         {/* Info Grid */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-surface p-4 rounded-3xl border border-border flex flex-col gap-1">
@@ -93,9 +105,21 @@ export default async function MotorcycleDetailPage({ params }: { params: { id: s
            </div>
         </div>
 
-        {/* Actions */}
-        <div className="mt-auto pt-10">
-           <DeleteMotorcycleButton id={moto.id} />
+        {/* Refuels Section */}
+        <RefuelsSection 
+           motorcycleId={id} 
+           initialRefuels={refuels} 
+           lastOdometer={moto.current_km || 0}
+           t={{
+             title: "Historial de Combustible",
+             addBtn: "Tanqueo"
+           }}
+        />
+
+        {/* Danger Zone */}
+        <div className="mt-8 pt-8 border-t border-white/5">
+          <h3 className="text-red-500/80 text-xs font-black uppercase tracking-[0.2em] mb-4 px-2">Zona de Peligro</h3>
+          <DeleteMotorcycleButton id={id} />
         </div>
       </div>
     </div>
