@@ -2,6 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { getTranslations } from 'next-intl/server'
+import { headers } from 'next/headers'
 
 /**
  * Server action to register a new user in Supabase.
@@ -16,11 +17,13 @@ export async function signUpUser(formData: FormData) {
   }
 
   const supabase = await createClient();
+  const origin = (await headers()).get('origin');
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
+      emailRedirectTo: `${origin}/auth/confirm`,
       data: {
         full_name: fullName,
       },
