@@ -24,21 +24,28 @@ export async function searchMotorcycleWithAI(query: string): Promise<{ data?: Mo
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-3-flash-preview' })
 
     const prompt = getMotorcycleSearchPrompt(query)
 
     const result = await model.generateContent(prompt)
-    const text = result.response.text().trim()
+    const response = result.response
+    const text = response.text().trim()
 
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) return { error: 'Could not parse AI response.' }
 
-    const parsed = JSON.parse(jsonMatch[0])
-    if (parsed.error === 'not_found') return { error: 'Motorcycle not found. Try a more specific name.' }
+    try {
+      const parsed = JSON.parse(jsonMatch[0])
+      if (parsed.error === 'not_found') return { error: 'Motorcycle not found. Try a more specific name.' }
+      return { data: parsed }
+    } catch (parseErr) {
+      return { error: 'AI response format error.' }
+    }
+  } catch (err: any) {
+    if (err.message?.includes('API_KEY_INVALID')) return { error: 'Invalid AI API Key.' }
+    if (err.message?.includes('quota') || err.status === 429) return { error: 'AI quota exceeded. Please try again later.' }
 
-    return { data: parsed }
-  } catch (err) {
     return { error: 'AI search failed. Please fill in the details manually.' }
   }
 }
