@@ -1,0 +1,16 @@
+{
+  "garage": "My Garage",
+  "addMotorcycle": "Add Motorcycle",
+  "make": "Brand",
+  "model": "Model",
+  "year": "Year",
+  "color": "Color",
+  "licensePlate": "License Plate",
+  "currentKm": "Current Mileage (km)",
+  "photo": "Photo",
+  "save": "Save",
+  "saving": "Saving...",
+  "emptyTitle": "Your garage is empty",
+  "emptySubtitle": "Add your first motorcycle and start tracking your rides.",
+  "addFirst": "Add my first moto"
+}

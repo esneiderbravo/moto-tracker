@@ -1,0 +1,16 @@
+{
+  "garage": "Mi Garaje",
+  "addMotorcycle": "Agregar Moto",
+  "make": "Marca",
+  "model": "Modelo",
+  "year": "Año",
+  "color": "Color",
+  "licensePlate": "Placa",
+  "currentKm": "Kilometraje actual",
+  "photo": "Foto",
+  "save": "Guardar",
+  "saving": "Guardando...",
+  "emptyTitle": "Tu garaje está vacío",
+  "emptySubtitle": "Agrega tu primera moto y empieza a registrar tus rodadas.",
+  "addFirst": "Agregar mi primera moto"
+}

@@ -1,0 +1,19 @@
+{
+  "registerTitle": "Create your Garage",
+  "registerSubtitle": "Join MotoTracker and start managing your rides.",
+  "loginTitle": "Welcome Back",
+  "loginSubtitle": "Enter your credentials to access your garage.",
+  "email": "Email Address",
+  "password": "Password",
+  "fullName": "Full Name",
+  "signUp": "Sign Up",
+  "login": "Log In",
+  "alreadyHaveAccount": "Already have an account? Login",
+  "dontHaveAccount": "Don't have an account? Sign Up",
+  "successTitle": "Email Sent!",
+  "successMessage": "We sent a secure link to your inbox. Tap it to verify your account and start your engines.",
+  "verifiedTitle": "Account Verified!",
+  "verifiedSubtitle": "Your email has been confirmed successfully. You are officially part of the MotoTracker grid.",
+  "goToGarage": "Enter my Garage",
+  "emailNotConfirmedError": "Please check your inbox and verify your email before logging in."
+}

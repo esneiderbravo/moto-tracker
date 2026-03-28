@@ -1,0 +1,19 @@
+{
+  "registerTitle": "Crea tu Garaje",
+  "registerSubtitle": "Únete a MotoTracker y comienza a gestionar tus rodadas.",
+  "loginTitle": "Bienvenido de vuelta",
+  "loginSubtitle": "Ingresa tus credenciales para acceder a tu garaje.",
+  "email": "Correo Electrónico",
+  "password": "Contraseña",
+  "fullName": "Nombre Completo",
+  "signUp": "Registrarse",
+  "login": "Iniciar Sesión",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta? Iniciar sesión",
+  "dontHaveAccount": "¿No tienes una cuenta? Regístrate",
+  "successTitle": "¡Correo Enviado!",
+  "successMessage": "Acabamos de enviarte un enlace mágico. Tócalo para verificar tu cuenta y encender motores.",
+  "verifiedTitle": "¡Cuenta Activada!",
+  "verifiedSubtitle": "Tu correo ha sido confirmado exitosamente. Ya eres oficialmente parte de la grilla de MotoTracker.",
+  "goToGarage": "Entrar a mi Garaje",
+  "emailNotConfirmedError": "Revisa tu bandeja de entrada y verifica tu correo antes de iniciar sesión."
+}

@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏍️ MotoTracker
 
-## Getting Started
+> **Smart Motorcycle Management.** The open-source, zero-cost PWA built for riders who want perfection in their pocket.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-SSR-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+[![Gemini AI](https://img.shields.io/badge/Gemini_AI-2.0_Flash-blue?style=for-the-badge&logo=google-gemini)](https://aistudio.google.com/)
+
+---
+
+## ✨ Features
+
+- 🤖 **AI-First Garage:** Add motorcycles by just typing their name. Powered by **Google Gemini 2.0 Flash** to auto-fill specs, color, and maintenance intervals.
+- 📱 **Mobile-First PWA:** Native-app feel with smooth transitions, modern bottom navigation, and premium dark UI.
+- 🔐 **Secure Auth:** Row Level Security (RLS) and SSR-based authentication via **Supabase**.
+- 🌍 **Full i18n:** Bilingual support (English & Spanish) out of the box.
+- 🖼️ **Cloud Storage:** High-performance avatar and motorcycle photo management.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS v4 + Framer Motion
+- **Database:** PostgreSQL (Supabase)
+- **Auth:** Supabase Auth (SSR)
+- **AI Engine:** Google AI SDK (Gemini)
+- **Localization:** `next-intl`
+
+---
+
+## 🚀 Quick Start
+
+### 1. Requirements
+- Node.js 18+
+- A Supabase Project
+- A Google AI Studio API Key
+
+### 2. Environment Setup
+Create a `.env` file based on `.env.example`:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+
+# AI
+GOOGLE_AI_API_KEY=your_gemini_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Database Initialization
+Run the following SQL in your **Supabase SQL Editor**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sql
+-- Create motorcycles table
+create table public.motorcycles (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  make text not null, model text not null, year int not null,
+  color text, license_plate text, current_km int default 0,
+  image_url text, created_at timestamptz default now()
+);
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-- Security
+alter table public.motorcycles enable row level security;
+create policy "Users can manage own motorcycles" on public.motorcycles for all using (auth.uid() = user_id);
 
-## Learn More
+-- Storage Buckets (avatars & motorcycles)
+insert into storage.buckets (id, name, public) values ('avatars', 'avatars', true), ('motorcycles', 'motorcycles', true);
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Run Locally
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗺️ Project Structure
 
-## Deploy on Vercel
+- `src/app/[locale]` - Routes & Pages (i18n aware)
+- `src/components/ui` - Reusable premium UI components
+- `src/app/actions` - Server Actions for Auth, Profile, and Garage
+- `src/ia/prompts` - Centralized AI prompt engineering
+- `src/translations` - JSON dictionaries for en/es
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+MotoTracker is a **Zero-Cost** project. We prioritize performance and clean code.
+
+1. Fork it
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+Developed with ❤️ for the global riding community.

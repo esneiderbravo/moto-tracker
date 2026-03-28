@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifica tu correo - MotoTracker</title>
+  <style>
+    /* Estilos inyectados (Inline/Internal) requeridos por los clientes de correo (Gmail, Outlook) */
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      background-color: #121212; 
+      color: #ffffff; 
+    }
+    .wrapper { 
+      width: 100%; 
+      background-color: #121212; 
+      padding: 40px 0; 
+    }
+    .container { 
+      max-width: 500px; 
+      margin: 0 auto; 
+      padding: 0 20px; 
+      text-align: center; 
+    }
+    .card { 
+      background-color: #1E1E1E; 
+      border: 1px solid #2C2C2C; 
+      border-radius: 24px; 
+      padding: 40px 30px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    }
+    .logo { 
+      font-size: 28px; 
+      font-weight: 800; 
+      letter-spacing: 2px; 
+      margin-bottom: 24px; 
+      color: #ffffff; 
+    }
+    .highlight { 
+      color: #FF5722; 
+    }
+    .title { 
+      font-size: 24px; 
+      font-weight: 800; 
+      margin-bottom: 16px; 
+      color: #ffffff; 
+      margin-top: 0;
+    }
+    .text { 
+      font-size: 16px; 
+      color: #A0A0A0; 
+      line-height: 1.6; 
+      margin-bottom: 32px; 
+    }
+    .button { 
+      display: inline-block; 
+      background-color: #FF5722; 
+      color: #ffffff; 
+      text-decoration: none; 
+      font-size: 16px; 
+      font-weight: 700; 
+      padding: 16px 32px; 
+      border-radius: 12px; 
+    }
+    .footer { 
+      margin-top: 32px; 
+      font-size: 12px; 
+      color: #555555; 
+      line-height: 1.5;
+    }
+    .link-fallback { 
+      color: #555555; 
+      word-break: break-all; 
+      margin-top: 24px; 
+      font-size: 12px; 
+    }
+    .link-fallback a {
+      color: #FF5722;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="card">
+        <div class="logo">MOTO<span class="highlight">TRACKER</span></div>
+        <h1 class="title">¡Bienvenido al Garaje!</h1>
+        <p class="text">
+          Estás a un solo tap de encender motores. Confirma tu correo electrónico para activar tu cuenta de MotoTracker y asegurar tu puesto en la grilla.
+        </p>
+        
+        <!-- Variable dinámica de Supabase -->
+        <a href="{{ .ConfirmationURL }}" class="button" target="_blank">
+          Verificar mi Cuenta
+        </a>
+        
+        <div class="link-fallback">
+          <p>¿El botón no funciona? Copia y pega este enlace en tu navegador:</p>
+          <a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p>Estás recibiendo este correo corporativo porque alguien se registró en MotoTracker con esta dirección.</p>
+        <p>&copy; 2026 MotoTracker App. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
