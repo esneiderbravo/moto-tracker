@@ -1,6 +1,7 @@
 import { getMotorcycleById } from '@/app/actions/motorcycles';
 import { Bike, Calendar, Palette, Hash, Gauge, ArrowLeft } from 'lucide-react';
-import { Link, notFound } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
 import DeleteMotorcycleButton from '@/components/garage/DeleteMotorcycleButton';
 
 /**
