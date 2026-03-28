@@ -2,6 +2,15 @@
 
 > **Smart Motorcycle Management.** The open-source, zero-cost PWA built for riders who want perfection in their pocket.
 
+### 🌟 The Mission
+MotoTracker was born from the need for a **clean, fast, and intelligent** way to manage everything about your motorcycle. Whether it's tracking maintenance via **AI**, managing your fleet in multiple languages, or ensuring your data is secure and accessible from any device—MotoTracker is the ultimate companion for every rider.
+
+**Why MotoTracker?**
+- **Zero-Cost Infrastructure:** Powered by Supabase & Gemini Free tiers.
+- **Privacy First:** Your data, your rules. No tracking, no ads.
+- **AI-Powered Specs:** Don't waste time typing; let Gemini handle the data entry.
+
+
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-SSR-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
