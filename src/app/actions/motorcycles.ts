@@ -77,3 +77,60 @@ export async function getUserMotorcycles() {
   if (error) return []
   return data ?? []
 }
+
+/**
+ * Server action to fetch a single motorcycle by its ID.
+ */
+export async function getMotorcycleById(id: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return null
+
+  const { data, error } = await supabase
+    .from('motorcycles')
+    .select('*')
+    .eq('id', id)
+    .eq('user_id', user.id)
+    .single()
+
+  if (error) return null
+  return data
+}
+
+/**
+ * Server action to delete a motorcycle record and its associated image from storage.
+ */
+export async function deleteMotorcycle(id: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return { error: 'Unauthorized' }
+
+  // 1. Get the motorcycle to find the image path
+  const { data: moto } = await supabase
+    .from('motorcycles')
+    .select('image_url')
+    .eq('id', id)
+    .single()
+
+  // 2. Delete the record
+  const { error } = await supabase
+    .from('motorcycles')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', user.id)
+
+  if (error) return { error: error.message }
+
+  // 3. Cleanup storage if image exists
+  if (moto?.image_url) {
+    const path = moto.image_url.split('/public/motorcycles/').pop()
+    if (path) {
+      await supabase.storage.from('motorcycles').remove([path])
+    }
+  }
+
+  revalidatePath('/[locale]', 'page')
+  return { success: true }
+}
