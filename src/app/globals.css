@@ -11,6 +11,12 @@
   --color-textSecondary: #A0A0A0;
 }
 
+html, body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; /* Previene selección de texto accidental */
+}
+
 body {
   background-color: var(--color-background);
   color: #ffffff;
