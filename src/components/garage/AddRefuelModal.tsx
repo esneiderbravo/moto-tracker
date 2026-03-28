@@ -139,7 +139,7 @@ export default function AddRefuelModal({ isOpen, onClose, motorcycleId, lastOdom
                       value={formData.odometer}
                       min={lastOdometer}
                       onChange={(e) => setFormData({ ...formData, odometer: parseInt(e.target.value) })}
-                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-[11px]"
+                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-base sm:text-[11px]"
                     />
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function AddRefuelModal({ isOpen, onClose, motorcycleId, lastOdom
                       placeholder="Ej: 3.5"
                       value={formData.liters}
                       onChange={(e) => setFormData({ ...formData, liters: e.target.value })}
-                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-[11px]"
+                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-base sm:text-[11px]"
                     />
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export default function AddRefuelModal({ isOpen, onClose, motorcycleId, lastOdom
                       placeholder="Ej: 25000"
                       value={formData.total_cost}
                       onChange={(e) => setFormData({ ...formData, total_cost: e.target.value })}
-                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-[11px]"
+                      className="w-full h-10 bg-surfaceHighlight border border-white/5 rounded-xl pl-9 pr-3 text-white font-medium focus:ring-1 focus:ring-primary/40 focus:border-primary outline-none transition-all text-base sm:text-[11px]"
                     />
                   </div>
                 </div>
