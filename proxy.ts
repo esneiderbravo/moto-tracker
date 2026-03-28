@@ -1,15 +1,15 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/routing';
+import { routing } from '@/i18n/routing';
 
 const intlMiddleware = createMiddleware(routing);
 
 /**
- * Middleware to intercept requests, handle i18n routing, and enforce Supabase SSR authentication.
+ * Proxy to intercept requests, handle i18n routing, and enforce Supabase SSR authentication.
  * Unauthenticated users attempting to access protected routes are redirected to the registration page.
  */
-export async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
 
   const supabase = createServerClient(
@@ -51,6 +51,8 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
+export { proxy };
+
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|map)$).*)']
 };
